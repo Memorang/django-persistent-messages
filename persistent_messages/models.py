@@ -14,8 +14,8 @@ LEVEL_TAGS = utils.get_level_tags()
 
 
 class Message(models.Model):
-    user = models.ForeignKey(settings.ADMIN_USER_MODEL, blank=True, null=True)
-    from_user = models.ForeignKey(settings.ADMIN_USER_MODEL, blank=True, null=True, related_name="from_user")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name="from_user")
     subject = models.CharField(max_length=255, blank=True, default='')
     message = models.TextField()
     LEVEL_CHOICES = (
