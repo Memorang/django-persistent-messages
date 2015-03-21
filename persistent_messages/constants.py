@@ -4,11 +4,13 @@ SUCCESS = 125
 WARNING = 130
 ERROR = 140
 
+
 DEFAULT_TAGS = {
     INFO: 'info',
     SUCCESS: 'success',
     WARNING: 'warning',
     ERROR: 'error',
 }
+
 
 PERSISTENT_MESSAGE_LEVELS = (INFO, SUCCESS, WARNING, ERROR)

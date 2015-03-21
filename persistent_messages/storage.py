@@ -1,14 +1,15 @@
-from persistent_messages.models import Message
-from persistent_messages.constants import PERSISTENT_MESSAGE_LEVELS
-from django.contrib import messages 
+import datetime
+from django.contrib import messages
 from django.contrib.messages.storage.base import BaseStorage
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.db.models import Q
-import datetime
+from persistent_messages.models import Message
+from persistent_messages.constants import PERSISTENT_MESSAGE_LEVELS
+
 
 def get_user(request):
-    if hasattr(request, 'user') and request.user.__class__ != AnonymousUser:
+    if hasattr(request, 'user') and not isinstance(request.user, AnonymousUser):
         return request.user
     else:
         return AnonymousUser()
@@ -20,9 +21,9 @@ close a message when it is displayed for the second time.
 """
 STORE_WHEN_ADDING = True
 
+
 #@TODO USE FALLBACK 
 class PersistentMessageStorage(FallbackStorage):
-
     def __init__(self, *args, **kwargs):
         super(PersistentMessageStorage, self).__init__(*args, **kwargs)
         self.non_persistent_messages = []
