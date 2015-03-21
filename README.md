@@ -1,6 +1,11 @@
 Django Persistent Messages
 ==========================
 
+
+FORK that works with Django 1.7
+-------------------------------
+
+
 A Django app for unified and persistent user messages/notifications, built on top of Django's [messages framework](http://docs.djangoproject.com/en/dev/ref/contrib/messages/) (`django.contrib.messages`).
 
 This app provides support for messages that are supposed to be persistent, that is, they outlast a browser session and will be displayed as “sticky” notes to the user, until they are actively marked as read. Once read, messages are still listed in the message inbox for each user. In short: While `django.contrib.messages` makes sure that messages you create are displayed to the user, this app makes sure that they actually get noticed.  
