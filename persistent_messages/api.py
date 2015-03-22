@@ -1,13 +1,20 @@
 from persistent_messages import notify
-from persistent_messages import constants 
+from persistent_messages import constants
+from django.contrib.messages.storage.base import BaseStorage
 
 
-def add_message(request, level, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None):
+def add_message(request, level, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None, storage=None):
     """
     """
     if email:
         notify.email(level, message, extra_tags, subject, user, from_user)
-    return request._messages.add(level, message, extra_tags, subject, user, from_user, expires, close_timeout)
+
+    if storage is None:
+        storage = request._messages
+
+    assert isinstance(storage, BaseStorage), "Incompatible message storage type."
+
+    return storage.add(level, message, extra_tags, subject, user, from_user, expires, close_timeout)
 
 
 def info(request, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None):
