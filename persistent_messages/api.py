@@ -24,6 +24,20 @@ def warning(request, message, extra_tags='', fail_silently=False, subject='', us
     return add_message(request, level, message, extra_tags, fail_silently, subject, user, email, from_user, expires, close_timeout)
 
 
+def success(request, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None):
+    """
+    """
+    level = constants.SUCCESS
+    return add_message(request, level, message, extra_tags, fail_silently, subject, user, email, from_user, expires, close_timeout)
+
+
+def error(request, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None):
+    """
+    """
+    level = constants.ERROR
+    return add_message(request, level, message, extra_tags, fail_silently, subject, user, email, from_user, expires, close_timeout)
+
+
 def debug(request, message, extra_tags='', fail_silently=False, subject='', user=None, email=False, from_user=None, expires=None, close_timeout=None):
     """
     """
