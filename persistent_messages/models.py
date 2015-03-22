@@ -86,4 +86,3 @@ class Message(models.Model):
             return u' '.join([label_tag, read_tag])
         return read_tag
     tags = property(_get_tags)
-    

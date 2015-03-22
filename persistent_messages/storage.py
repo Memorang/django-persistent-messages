@@ -1,5 +1,6 @@
 import datetime
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.messages.storage.base import BaseStorage
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages.storage.fallback import FallbackStorage
@@ -9,10 +10,12 @@ from persistent_messages.constants import PERSISTENT_MESSAGE_LEVELS
 
 
 def get_user(request):
-    if hasattr(request, 'user') and not isinstance(request.user, AnonymousUser):
+    if isinstance(request, get_user_model()):
+        return request
+    elif hasattr(request, 'user'):
         return request.user
     else:
-        return AnonymousUser()
+        raise Exception
 
 """
 Messages need a primary key when being displayed so that they can be closed/marked as read by the user.
