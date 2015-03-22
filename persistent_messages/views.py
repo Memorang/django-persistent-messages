@@ -21,8 +21,11 @@ def message_detail(request, message_id):
     message = get_object_or_404(Message, user=user, pk=message_id)
     message.read = True
     message.save()
-    return render_to_response('persistent_messages/message/detail.html', {'message': message},
-        context_instance=RequestContext(request))
+    return render_to_response(
+        'persistent_messages/message/detail.html',
+        {'message': message},
+        context_instance=RequestContext(request)
+    )
 
 
 def message_mark_read(request, message_id):
