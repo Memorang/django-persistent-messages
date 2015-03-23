@@ -19,13 +19,13 @@ def get_user(request):
 
 """
 Messages need a primary key when being displayed so that they can be closed/marked as read by the user.
-Hence, they need to be stored when being added. You can disable this, but then you'll only be able to 
-close a message when it is displayed for the second time. 
+Hence, they need to be stored when being added. You can disable this, but then you'll only be able to
+close a message when it is displayed for the second time.
 """
 STORE_WHEN_ADDING = True
 
 
-#@TODO USE FALLBACK 
+#@TODO USE FALLBACK
 class PersistentMessageStorage(FallbackStorage):
     def __init__(self, *args, **kwargs):
         super(PersistentMessageStorage, self).__init__(*args, **kwargs)
@@ -65,7 +65,7 @@ class PersistentMessageStorage(FallbackStorage):
 
     def count_persistent_unread(self):
         return self.get_persistent_unread().count()
-        
+
     def _delete_non_persistent(self):
         for message in self.non_persistent_messages:
             message.delete()
@@ -88,7 +88,7 @@ class PersistentMessageStorage(FallbackStorage):
         Obsolete method since model takes care of this.
         """
         pass
-        
+
     def _store(self, messages, response, *args, **kwargs):
         """
         Stores a list of messages, returning a list of any messages which could
@@ -100,9 +100,12 @@ class PersistentMessageStorage(FallbackStorage):
         if not get_user(self.request).is_authenticated():
             return super(PersistentMessageStorage, self)._store(messages, response, *args, **kwargs)
         for message in messages:
-            if not self.used or message.is_persistent():
-                if not message.pk:
-                    message.save()
+            if not self.used \
+                    and hasattr(message, 'is_persistent') \
+                    and message.is_persistent() \
+                    and hasattr(message, 'pk') \
+                    and not message.pk \
+                message.save()
         return []
 
     def update(self, response):
