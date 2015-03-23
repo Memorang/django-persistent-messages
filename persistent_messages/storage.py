@@ -104,7 +104,7 @@ class PersistentMessageStorage(FallbackStorage):
                     and hasattr(message, 'is_persistent') \
                     and message.is_persistent() \
                     and hasattr(message, 'pk') \
-                    and not message.pk \
+                    and not message.pk:
                 message.save()
         return []
 
