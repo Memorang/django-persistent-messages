@@ -15,7 +15,7 @@ def get_user(request):
     elif hasattr(request, 'user'):
         return request.user
     else:
-        raise Exception
+        return AnonymousUser()
 
 """
 Messages need a primary key when being displayed so that they can be closed/marked as read by the user.
