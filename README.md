@@ -1,9 +1,8 @@
+FORK that works with Django 1.9.x
+-------------------------------
+
 Django Persistent Messages
 ==========================
-
-
-FORK that works with Django 1.7
--------------------------------
 
 
 A Django app for unified and persistent user messages/notifications, built on top of Django's [messages framework](http://docs.djangoproject.com/en/dev/ref/contrib/messages/) (`django.contrib.messages`).
