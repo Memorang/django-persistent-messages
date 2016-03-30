@@ -1,4 +1,3 @@
-import os
 from setuptools import (
     find_packages,
     setup,
@@ -9,13 +8,13 @@ setup(
     name='django-persistent-messages',
     author='philomat',
     maintainer='gjcourt',
-    version='0.1.1',
-    description='A Django app for unified and persistent user messages/notifications, built on top of Django\'s messages framework',
+    version='0.1.2',
+    description='Persistent messages built on top of Django\'s messages framework',
     long_description=open('README.md').read(),
     license='MIT',
     url='http://github.com/memorang/django-persistent-messages',
     keywords=['messages', 'django', 'persistent',],
-    packages=find_packages()
+    packages=find_packages(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
